@@ -11,7 +11,7 @@ def call(body) {
             volumes: [
                     [$class: 'SecretVolume', mountPath: '/home/jenkins/.docker', secretName: 'jenkins-docker-cfg'],
                     [$class: 'HostPathVolume', mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'],
-                    [$class: 'SecretVolume', mountPath: '/home/jenkins/.ssh', secretName: 'jenkins-ssh-config'],
+                    [$class: 'SecretVolume', mountPath: '/root/.ssh', secretName: 'jenkins-ssh-config'],
                     [$class: 'SecretVolume', mountPath: '/home/jenkins/.ssh-git', secretName: 'jenkins-git-ssh']
             ]) {
         node(label) {
