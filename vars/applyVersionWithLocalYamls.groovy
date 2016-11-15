@@ -16,6 +16,6 @@ def call(String version, String env) {
 }
 
 def extractNamespaceFromYaml(String yaml) {
-    def matcher = yaml =~ /\s+namespace:\s*(\w+)/
+    def matcher = yaml =~ /\s*namespace:\s*((\w|\-)+)/
     return matcher[0][1]
 }
