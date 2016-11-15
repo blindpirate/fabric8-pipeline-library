@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
 
-def doRollback(String projectName, String branch = 'master') {
+def call(String projectName, String branch = 'master') {
 
     def dockerRegistryHost = "http://registry.grootapp.com:5000";
     def getAllTagsUri = "/v1/repositories/${projectName}/tags";

@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-def applyVersionWithLocalYamls(String version, String env) {
+def call(String version, String env) {
     def dockerRegistryHost = "registry.grootapp.com:5000";
     String deployment = readFile("deploy/${env}/deployment.yaml");
 
