@@ -1,7 +1,12 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
 
-def call(String projectName, String branch = 'master') {
+
+def call(Map map) {
+    return call(map.projectName, map.branch);
+}
+
+def call(String projectName, String branch) {
 
     def dockerRegistryHost = "http://registry.grootapp.com:5000";
     def getAllTagsUri = "/v1/repositories/${projectName}/tags";
