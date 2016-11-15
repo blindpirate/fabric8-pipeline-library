@@ -1,6 +1,4 @@
 #!/usr/bin/groovy
-import groovy.json.JsonSlurper
-
 
 def call(Map map) {
     return call(map.projectName, map.branch, map.env);
@@ -17,7 +15,7 @@ def call(String projectName, String branch, env) {
     println(responseJson)
 
     // {name:xxx,tags:[tag1,tag2,...]}
-    Map response = new JsonSlurper().parseText(responseJson) as Map;
+    Map response = new groovy.json.JsonSlurperClassic().parseText(responseJson) as Map;
 
     def versionsStr = response.tags.join('\n');
 
