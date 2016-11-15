@@ -21,7 +21,10 @@ def call(String projectName, String branch, env) {
 
     def versionsStr = response.tags.join('\n');
 
-    def rollbackVersion = input(message: 'Select a version to rollback', ok: 'OK', [choice(choices: versionsStr)])
+    def rollbackVersion = input(
+            message: 'Select a version to rollback',
+            ok: 'OK',
+            parameters:[choice(choices: versionsStr)])
 
     applyVersionWithLocalYamls(version: rollbackVersion, env: 'Production');
 
