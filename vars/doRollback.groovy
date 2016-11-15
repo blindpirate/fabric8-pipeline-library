@@ -25,6 +25,8 @@ def call(String projectName, String branch, String env) {
             ok: 'OK',
             parameters: [choice(choices: versionsStr)])
 
+    println rollbackVersion
+
     applyVersionWithLocalYamls(version: rollbackVersion, env: env);
 
 }
