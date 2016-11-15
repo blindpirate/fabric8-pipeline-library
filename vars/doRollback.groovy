@@ -4,7 +4,7 @@ def call(Map map) {
     return call(map.projectName, map.branch, map.env);
 }
 
-def call(String projectName, String branch, env) {
+def call(String projectName, String branch, String env) {
 
     def dockerRegistryHost = "http://registry.grootapp.com:5000";
     def getAllTagsUri = "/v2/${projectName}/tags/list";
@@ -23,9 +23,9 @@ def call(String projectName, String branch, env) {
             id: 'versonSelect',
             message: 'Select a version to rollback',
             ok: 'OK',
-            parameters:[choice(choices: versionsStr)])
+            parameters: [choice(choices: versionsStr)])
 
-    applyVersionWithLocalYamls(version: rollbackVersion, env: 'Production');
+    applyVersionWithLocalYamls(version: rollbackVersion, env: env);
 
 }
 
