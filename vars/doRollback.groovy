@@ -35,6 +35,8 @@ List sortByTimestamp(List tags) {
     List ret = tags.toSorted({ a, b ->
         return extractTimestampOrZero(b) - extractTimestampOrZero(a);
     });
+    ret.each {println it}
+    ret.each {println it.class}
     return ret;
 }
 
