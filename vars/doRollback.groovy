@@ -31,10 +31,11 @@ def call(String projectName, String branch, String env) {
 }
 
 @NonCPS
-def sortByTimestamp(List tags) {
-    return tags.toSorted({ a, b ->
-        extractTimestampOrZero(b) - extractTimestampOrZero(a);
-    })
+List sortByTimestamp(List tags) {
+    List ret = tags.toSorted({ a, b ->
+        return extractTimestampOrZero(b) - extractTimestampOrZero(a);
+    });
+    return ret;
 }
 
 def extractTimestampOrZero(String s) {
