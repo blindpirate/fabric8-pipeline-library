@@ -20,10 +20,9 @@ def call(String projectName, String branch, String env) {
     def versionsStr = response.tags.join('\n');
 
     def rollbackVersion = input(
-            id: 'versonSelect',
             message: 'Select a version to rollback',
             ok: 'OK',
-            parameters: [choice(choices: versionsStr)])
+            parameters: [choice(choices: versionsStr, description: 'version', name: 'version')])
 
     println rollbackVersion
 
