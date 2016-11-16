@@ -17,11 +17,7 @@ def call(String projectName, String branch, String env) {
     // {name:xxx,tags:[tag1,tag2,...]}
     Map response = new groovy.json.JsonSlurperClassic().parseText(responseJson) as Map;
 
-    def sortedTags = response.tags.sort({ a, b ->
-        return extractTimestampOrZero(b) - extractTimestampOrZero(a);
-    })
-
-    def versionsStr = response.tags.join('\n');
+    def versionsStr = sortByTimestamp(response.tags).join('\n');
 
     def rollbackVersion = input(
             message: 'Select a version to rollback',
@@ -35,6 +31,12 @@ def call(String projectName, String branch, String env) {
 }
 
 @NonCPS
+def sortByTimestamp(List tags) {
+    return tags.sort({ a, b ->
+        extractTimestampOrZero(b) - extractTimestampOrZero(a);
+    })
+}
+
 def extractTimestampOrZero(String s) {
     try {
         return s.split(/\-/)[-1].toInteger();
