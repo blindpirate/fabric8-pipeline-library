@@ -30,16 +30,15 @@ def call(String projectName, String branch, String env) {
 
 }
 
-@NonCPS
-List sortByTimestamp(List tags) {
-    println tags
-//    List ret = tags.toSorted({ a, b ->
-//        return extractTimestampOrZero(b) - extractTimestampOrZero(a);
-//    });
-    ret=tags.toSorted();
-    ret.each {println it}
-    ret.each {println it.class}
-    return ret;
+// DO NOT use sort/toSorted
+def sortByTimestamp(List tags) {
+    def tmp = new ArrayList(tags);
+    Collections.sort(tmp, new Comparable<String>() {
+        int compareTo(String a, String b) {
+            return extractTimestampOrZero(b) - extractTimestampOrZero(a);
+        }
+    })
+    return tmp;
 }
 
 def extractTimestampOrZero(String s) {
