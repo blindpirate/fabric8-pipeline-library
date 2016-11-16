@@ -34,6 +34,7 @@ def call(String projectName, String branch, String env) {
 
 }
 
+@NonCPS
 def extractTimestampOrZero(String s) {
     try {
         return s.split(/\-/)[-1].toInteger();
