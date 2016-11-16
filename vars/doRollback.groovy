@@ -17,6 +17,10 @@ def call(String projectName, String branch, String env) {
     // {name:xxx,tags:[tag1,tag2,...]}
     Map response = new groovy.json.JsonSlurperClassic().parseText(responseJson) as Map;
 
+    def sortedTags = response.tags.sort({ a, b ->
+        return extractTimestampOrZero(b) - extractTimestampOrZero(a);
+    })
+
     def versionsStr = response.tags.join('\n');
 
     def rollbackVersion = input(
@@ -28,6 +32,14 @@ def call(String projectName, String branch, String env) {
 
     applyVersionWithLocalYamls(version: rollbackVersion, env: env);
 
+}
+
+def extractTimestampOrZero(String s) {
+    try {
+        return s.split(/\-/)[-1].toInteger();
+    } catch (Exception e) {
+        return 0;
+    }
 }
 
 
